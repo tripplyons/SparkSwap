@@ -1,6 +1,6 @@
 
-import Button from '@mui/joy/Button';
-import Box from '@mui/joy/Box';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 export default function LogoNail() {
     return (
