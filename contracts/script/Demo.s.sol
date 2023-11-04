@@ -20,7 +20,7 @@ contract Demo is Script {
 
         vm.startBroadcast(sellerPrivateKey);
         TokenIssuer tokenIssuer = new TokenIssuer();
-        tokenIssuer.issueToken("LOCATION, TIME", 1000e18, "Solar", 1);
+        tokenIssuer.issueToken("Troy NY, 2023-11-05", 1000e18, "Solar", 1);
         vm.stopBroadcast();
 
         Auction auction = Auction(tokenIssuer.getAuction(0));
@@ -35,10 +35,12 @@ contract Demo is Script {
         tokenIssuer.endRound(0);
         vm.stopBroadcast();
 
+        /*
         vm.startBroadcast(traderPrivateKey);
         token.approve(address(tradeClaims), 1000e18);
         tradeClaims.createSellOffer(1, 1e18, 1e18);
         tradeClaims.createSellOffer(2, 1e18, 2e18);
         vm.stopBroadcast();
+        */
     }
 }

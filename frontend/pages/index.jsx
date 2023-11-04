@@ -5,7 +5,11 @@ const Home = () => {
   return (
     <div>
       <Head>
-        <title>RainbowKit App</title>
+        <title>SparkSwap</title>
+        <meta
+          content="SparkSwap website"
+          name="description"
+        />
         <link href="/favicon.ico" rel="icon" />
       </Head>
       <div id="header" class="flex 10vh bg-gray-200 mb-5">
