@@ -1,14 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity =0.8.22;
 
-contract ClaimToken {
-    uint256 public number;
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-    function setNumber(uint256 newNumber) public {
-        number = newNumber;
-    }
-
-    function increment() public {
-        number++;
+contract ClaimToken is ERC20 {
+    constructor(string memory name, uint supply) ERC20(name, name) {
+        _mint(msg.sender, supply);
     }
 }
