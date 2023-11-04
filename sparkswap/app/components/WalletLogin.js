@@ -15,7 +15,7 @@ export default function WalletLogin() {
             }}>
                 Bruh
             </Button>
-        </Box>
+        </Grid></Grid>
     );
 }
   
