@@ -1,35 +1,25 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Nav from '../components/Nav';
 import Head from 'next/head';
-import LogoDisplayer from '../components/logoDisp.jsx'
-const Home = () => {
+import CancelRequest from '../components/CancelRequest';
+import CreateRequest from '../components/CreateRequest';
+import AcceptRequest from '../components/AcceptRequest';
+import { useContractReads } from 'wagmi'
+import TradeClaims from '../src/contracts/TradeClaims.json'
+import Auction from '../src/contracts/Auction.json'
+import ClaimToken from '../src/contracts/ClaimToken.json'
+import TokenIssuer from '../src/contracts/TokenIssuer.json'
+import Balance from '../components/Balance';
+import { useState, useEffect } from 'react';
+import OrdersTable from '../components/OrdersTable';
+import TraderInterface from '../components/TraderInterface';
+
+export default function Trader() {
+  const [index, setIndex] = useState(0);
+
   return (
     <div>
-      <Head>
-        <title>SparkSwap</title>
-        <meta
-          content="SparkSwap website"
-          name="description"
-        />
-        <link href="/favicon.ico" rel="icon" />
-      </Head>
-      <div id="header" class="flex 10vh bg-gray-200 mb-5">
-        <div class="m-4 flex-initial m-auto" >
-          <div class="ml-4">
-            <LogoDisplayer/>
-          </div>
-        </div>
-        <div class="flex-1"></div>
-        <div class="m-4 flex-initial align-middle" >
-          <ConnectButton/>
-        </div>
-      </div>
-      <div id="body" class="h-full">
-        <div class="overflow-y-scroll">
-
-        </div>
-      </div>
+      <Nav switcherState={index} OnChange={e=>setIndex(e.target.value)}/>
+      <TraderInterface index={index} />
     </div>
   );
-};
-
-export default Home;
+}
