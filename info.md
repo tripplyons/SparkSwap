@@ -8,6 +8,17 @@ NO LOGIN JUST CONNECT WALLET AND GO
 
  
 # User / Trader
+Offers that are currently in place 
+Anything that is current
+	Trader would want to see:
+		How much others selling for and where and what resource and who created it 
+		Must be able to cancel sell requests
+		Must be able to sell for certain price 
+
+		Create buy offers 
+		Must be able to view past buy offers
+		
+
 	Buy from trader
 		How much they are willing to pay max for each individual resource  
 		Tell them if its available and if yes buy
