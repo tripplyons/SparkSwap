@@ -14,7 +14,7 @@ export default function Orders({ exchangeAddress, buy }) {
   }
 
   const { data, fetchNextPage, refetch } = useContractInfiniteReads({
-    cacheKey: 'aksdfjalsdkfj',
+    cacheKey: buy ? 'buy' : 'sell',
     ...paginatedIndexesConfig(
       (param = 0) => {
         return [
@@ -26,14 +26,14 @@ export default function Orders({ exchangeAddress, buy }) {
   })
 
   return (
-    <Card title="Orders">
+    <Card title={buy ? "Buy Orders" : "Sell Orders"}>
       <Button onClick={refetch}>Refresh</Button>
       {
         data?.pages ? (
           <table className="table table-striped">
             <thead>
               <tr>
-                <th>Seller</th>
+                <th>{buy ? "Buyer" : "Seller"}</th>
                 <th>ID</th>
                 <th>Ether</th>
                 <th>kWh</th>

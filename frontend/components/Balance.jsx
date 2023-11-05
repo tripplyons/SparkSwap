@@ -15,6 +15,7 @@ export default function Balance({ tokenAddress }) {
     abi: ClaimToken.abi,
     functionName: 'balanceOf',
     args: [address],
+    watch: true
   })
   const name = useContractRead({
     address: tokenAddress,

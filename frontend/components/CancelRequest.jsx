@@ -7,23 +7,23 @@ import TradeClaims from '../src/contracts/TradeClaims.json'
 import Card from './Card';
 import ethers from 'ethers';
 
-export default function CancelSellRequest({ exchangeAddress }) {
+export default function CancelRequest({ exchangeAddress, buy }) {
   const { data, isLoading, isSuccess, write } = useContractWrite({
     address: exchangeAddress,
     abi: TradeClaims.abi,
-    functionName: 'cancelSellOffer',
+    functionName: buy ? 'cancelBuyOffer' : 'cancelSellOffer',
   })
 
   const [id, setId] = useState("");
 
   return (
-    <Card title="Cancel Sell Order">
+    <Card title={buy ? "Cancel Buy Order" : "Cancel Sell Order"}>
       <Input
         onChange={(e) => {
           setId(e.target.value)
         }}
         value={id}
-        label="ID"
+        label="Order ID"
       />
       <Button onClick={() => write({args: [id]})}>Feed</Button>
       {isLoading && <div>Check Wallet</div>}

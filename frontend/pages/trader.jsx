@@ -1,7 +1,8 @@
 import Nav from '../components/Nav';
 import Head from 'next/head';
-import CancelSellRequest from '../components/CancelSellRequest';
-import CreateSellRequest from '../components/CreateSellRequest';
+import CancelRequest from '../components/CancelRequest';
+import CreateRequest from '../components/CreateRequest';
+import AcceptRequest from '../components/AcceptRequest';
 import { useContractReads } from 'wagmi'
 import TradeClaims from '../src/contracts/TradeClaims.json'
 import Auction from '../src/contracts/Auction.json'
@@ -63,11 +64,19 @@ export default function Trader() {
       {
         data ? (
           <>
-            <div className="flex gap-4">
+            <div className="grid grid-cols-3 gap-4">
               <Balance tokenAddress={data[0].result} />
-              <CancelSellRequest exchangeAddress={data[2].result} />
-              <CreateSellRequest tokenAddress={data[0].result} exchangeAddress={data[2].result} />
+              <CancelRequest exchangeAddress={data[2].result} buy={false} />
+              <CreateRequest tokenAddress={data[0].result} buy={false} exchangeAddress={data[2].result} />
+              <div />
+              <AcceptRequest tokenAddress={data[0].result} buy={false} exchangeAddress={data[2].result} />
               <OrdersTable exchangeAddress={data[2].result} buy={false} />
+              <div />
+              <CancelRequest exchangeAddress={data[2].result} buy={true} />
+              <CreateRequest tokenAddress={data[0].result} exchangeAddress={data[2].result} buy={true} />
+              <div />
+              <AcceptRequest tokenAddress={data[0].result} exchangeAddress={data[2].result} buy={true} />
+              <OrdersTable exchangeAddress={data[2].result} buy={true} />
             </div>
           </>
         ) : null

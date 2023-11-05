@@ -7,11 +7,11 @@ import TradeClaims from '../src/contracts/TradeClaims.json'
 import ClaimToken from '../src/contracts/ClaimToken.json'
 import Card from './Card';
 
-export default function AcceptSellRequest({ tokenAddress, exchangeAddress }) {
+export default function CreateRequest({ buy, tokenAddress, exchangeAddress }) {
   const { data, isLoading, isSuccess, write } = useContractWrite({
     address: exchangeAddress,
     abi: TradeClaims.abi,
-    functionName: 'createSellOffer',
+    functionName: buy ? 'createBuyOffer' : 'createSellOffer',
   })
 
   const [id, setId] = useState("");
@@ -25,13 +25,13 @@ export default function AcceptSellRequest({ tokenAddress, exchangeAddress }) {
   })
 
   return (
-    <Card title="Create Sell Order">
+    <Card title={buy ? "Create Buy Order" : "Create Sell Order"}>
       <Input
         onChange={(e) => {
           setId(e.target.value)
         }}
         value={id}
-        label="ID"
+        label="Order ID"
       />
       <Input
         onChange={(e) => {
@@ -47,11 +47,15 @@ export default function AcceptSellRequest({ tokenAddress, exchangeAddress }) {
         value={etherAmount}
         label="Ether Amount"
       />
-      <Button onClick={() => {
-        approveToken.write({
-          args: [exchangeAddress, "1" + "0".repeat(27)],
-        })
-      }}>Approve</Button>
+      {
+        buy ? null : (
+          <Button onClick={() => {
+            approveToken.write({
+              args: [exchangeAddress, "1" + "0".repeat(27)],
+            })
+          }}>Approve</Button>
+        )
+      }
       <Button onClick={() => {
         let value = parseFloat(etherAmount) * 10 ** 9;
         value = value.toString() + "000000000";
@@ -59,7 +63,8 @@ export default function AcceptSellRequest({ tokenAddress, exchangeAddress }) {
         tokens = tokens.toString() + "000000000";
 
         write({
-          args: [id, tokens, value],
+          args: [id, tokens],
+          value: value
         })
       }}>Create</Button>
       {isLoading && <div>Check Wallet</div>}
