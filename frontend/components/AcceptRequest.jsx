@@ -72,7 +72,9 @@ export default function AcceptRequest({ tokenAddress, exchangeAddress, buy, id, 
             value: parseEther(etherAmount)
           })
         }
-      }}>Buy</Button>
+      }}
+        noMargin
+      >Buy</Button>
   )
       // {isLoading && <div>Check Wallet</div>}
       // {isSuccess && <div>Success</div>}

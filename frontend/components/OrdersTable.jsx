@@ -48,9 +48,9 @@ export default function Orders({ tokenAddress, exchangeAddress, buy }) {
       }
       {
         data?.pages ? (
-          <table className="table table-striped">
+          <table className="table w-full border">
             <thead>
-              <tr>
+              <tr className="border border-black">
                 <th>{buy ? "Buyer" : "Seller"}</th>
                 <th>ID</th>
                 <th>Ether</th>

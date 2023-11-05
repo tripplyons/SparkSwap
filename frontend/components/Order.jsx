@@ -13,7 +13,7 @@ export default function Order({buy, tokenAddress, exchangeAddress, orderId, user
     args: [user, orderId]
   })
   return (
-    <tr>
+    <tr className="border border-black">
       <td>{user}</td>
       <td>{orderId}</td>
       <td>{data && (data[1] !== null ? formatUnits(data[1], 18) : null)}</td>
