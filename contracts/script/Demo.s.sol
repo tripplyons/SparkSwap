@@ -35,12 +35,10 @@ contract Demo is Script {
         tokenIssuer.endRound(0);
         vm.stopBroadcast();
 
-        /*
         vm.startBroadcast(traderPrivateKey);
         token.approve(address(tradeClaims), 1000e18);
         tradeClaims.createSellOffer(1, 1e18, 1e18);
         tradeClaims.createSellOffer(2, 1e18, 2e18);
         vm.stopBroadcast();
-        */
     }
 }

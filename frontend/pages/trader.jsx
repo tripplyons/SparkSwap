@@ -9,6 +9,7 @@ import ClaimToken from '../src/contracts/ClaimToken.json'
 import TokenIssuer from '../src/contracts/TokenIssuer.json'
 import Balance from '../components/Balance';
 import { useState, useEffect } from 'react';
+import OrdersTable from '../components/OrdersTable';
 
 export default function Trader() {
   const contract = {
@@ -66,6 +67,7 @@ export default function Trader() {
               <Balance tokenAddress={data[0].result} />
               <CancelSellRequest exchangeAddress={data[2].result} />
               <CreateSellRequest tokenAddress={data[0].result} exchangeAddress={data[2].result} />
+              <OrdersTable exchangeAddress={data[2].result} buy={false} />
             </div>
           </>
         ) : null
