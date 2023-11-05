@@ -1,6 +1,6 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Head from 'next/head';
-import LogoDisplayer from './logoDisp.jsx'
+import LogoDisplayer from '../components/logoDisp.jsx'
 const Home = () => {
   return (
     <div>

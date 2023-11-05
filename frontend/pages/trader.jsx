@@ -18,10 +18,7 @@ export default function Trader() {
 
   return (
     <div>
-      <select onChange={(e) => setIndex(e.target.value)}>
-        <option value={0}>0</option>
-        <option value={1}>1</option>
-      </select>
+      <Nav switcherState={index} OnChange={e=>setIndex(e.target.value)}/>
       <TraderInterface index={index} />
     </div>
   );

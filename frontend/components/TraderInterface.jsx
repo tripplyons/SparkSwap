@@ -69,7 +69,6 @@ export default function TraderInterface({index}) {
         />
         <link href="/favicon.ico" rel="icon" />
       </Head>
-      <Nav />
       {
         data ? (
           <>
