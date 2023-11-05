@@ -16,6 +16,7 @@ export default function Nav({switcherState, OnChange}) {
         <select value={switcherState} onChange={OnChange}>
             <option value={0}>Solar</option>
             <option value={1}>Wind</option>
+            <option value={2}>Coal</option>
           </select>
       </div>
     </div>
