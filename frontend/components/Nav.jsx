@@ -8,11 +8,11 @@ export default function Nav({switcherState, OnChange}) {
         <LogoDisplayer/>
       </div>
     </div>
-    <div class="m-auto flex-1">
-      
+    <div class="m-auto flex-1 text-right">
+      Choose power option:
     </div>
     <div class="m-auto flex-1">
-      <div class="m-4">
+      <div class="items-center">
         <select value={switcherState} onChange={OnChange}>
             <option value={0}>Solar</option>
             <option value={1}>Wind</option>

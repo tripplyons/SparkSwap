@@ -1,4 +1,4 @@
-import Button from './Button';
+/*import Button from './Button';
 import Input from './Input';
 import Order from './Order';
 import { formatUnits } from 'ethers';
@@ -6,7 +6,46 @@ import { useContractInfiniteReads, paginatedIndexesConfig } from 'wagmi'
 import TradeClaims from '../src/contracts/TradeClaims.json'
 import Card from './Card';
 import React from 'react';
+import Button from './Button';
+import Input from './Input';
+import { parseEther } from 'ethers';
 
+import { useState } from 'react';
+import { useContractRead, useContractWrite, usePrepareContractWrite } from 'wagmi'
+import TradeClaims from '../src/contracts/TradeClaims.json'
+import ClaimToken from '../src/contracts/ClaimToken.json'
+import Card from './Card';
+
+export default function AcceptRequest({ tokenAddress, exchangeAddress, buy }) {
+  const [id, setId] = useState("");
+  const [address, setAddress] = useState("");
+  const [etherAmount, setEtherAmount] = useState("");
+
+  const { data, isLoading, isSuccess, write } = useContractWrite({
+    address: exchangeAddress,
+    abi: TradeClaims.abi,
+    functionName: buy ? 'acceptBuyOffer' : 'acceptSellOffer',
+  })
+
+  const approveToken = useContractWrite({
+    address: tokenAddress,
+    abi: ClaimToken.abi,
+    functionName: 'approve',
+  })
+
+
+    //Accept buy order stuff
+    setAddress(e.target.value)
+    //Order ID
+    setId(e.target.value)
+    //Ether amount
+    setEtherAmount(e.target.value)
+    //Wacky button
+      <Button onClick={() => {
+          write({
+            args: [id, address]
+          })
+      }}>Buy</Button>
 export default function Orders({ exchangeAddress, buy }) {
   const contractConfig = {
     address: exchangeAddress,
@@ -17,7 +56,6 @@ export default function Orders({ exchangeAddress, buy }) {
     cacheKey: buy ? 'buy' : 'sell',
     ...paginatedIndexesConfig(
       (param = 0) => {
-        console.log(contractConfig);
         return [
           { ...contractConfig, functionName: buy ? 'buyOfferIndex' : 'sellOfferIndex', args: [param] },
         ]
@@ -58,3 +96,4 @@ export default function Orders({ exchangeAddress, buy }) {
     </Card>
   )
 }
+*/
