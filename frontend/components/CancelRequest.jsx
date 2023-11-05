@@ -25,7 +25,7 @@ export default function CancelRequest({ exchangeAddress, buy }) {
         value={id}
         label="Order ID"
       />
-      <Button onClick={() => write({args: [id]})}>Feed</Button>
+      <Button onClick={() => write({args: [id]})}>Cancel</Button>
       {isLoading && <div>Check Wallet</div>}
       {isSuccess && <div>Success</div>}
     </Card>
