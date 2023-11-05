@@ -11,76 +11,18 @@ import TokenIssuer from '../src/contracts/TokenIssuer.json'
 import Balance from '../components/Balance';
 import { useState, useEffect } from 'react';
 import OrdersTable from '../components/OrdersTable';
+import TraderInterface from '../components/TraderInterface';
 
 export default function Trader() {
-  const contract = {
-    abi: TokenIssuer.abi,
-    address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-  }
-
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    if (!loaded && typeof window !== 'undefined') {
-      setLoaded(true);
-    }
-  }, [loaded]);
-
-  const { data, isError, isLoading } = useContractReads({
-    contracts: [
-      {
-        ...contract,
-        functionName: 'getToken',
-        args: [0]
-      },
-      {
-        ...contract,
-        functionName: 'getAuction',
-        args: [0],
-      },
-      {
-        ...contract,
-        functionName: 'getTradeClaims',
-        args: [0],
-      }
-    ],
-  })
-
-  if (!loaded) {
-    return null
-  }
+  const [index, setIndex] = useState(0);
 
   return (
     <div>
-      <Head>
-        <title>SparkSwap</title>
-        <meta
-          content="SparkSwap website"
-          name="description"
-        />
-        <link href="/favicon.ico" rel="icon" />
-      </Head>
-      <Nav />
-      {
-        data ? (
-          <>
-            <div className="grid grid-cols-3 gap-4">
-              <Balance tokenAddress={data[0].result} />
-              <CancelRequest exchangeAddress={data[2].result} buy={false} />
-              <CreateRequest tokenAddress={data[0].result} buy={false} exchangeAddress={data[2].result} />
-              <div />
-              <AcceptRequest tokenAddress={data[0].result} buy={false} exchangeAddress={data[2].result} />
-              <OrdersTable exchangeAddress={data[2].result} buy={false} />
-              <div />
-              <CancelRequest exchangeAddress={data[2].result} buy={true} />
-              <CreateRequest tokenAddress={data[0].result} exchangeAddress={data[2].result} buy={true} />
-              <div />
-              <AcceptRequest tokenAddress={data[0].result} exchangeAddress={data[2].result} buy={true} />
-              <OrdersTable exchangeAddress={data[2].result} buy={true} />
-            </div>
-          </>
-        ) : null
-      }
+      <select onChange={(e) => setIndex(e.target.value)}>
+        <option value={0}>0</option>
+        <option value={1}>1</option>
+      </select>
+      <TraderInterface index={index} />
     </div>
   );
 }

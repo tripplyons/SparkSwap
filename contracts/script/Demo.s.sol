@@ -40,5 +40,29 @@ contract Demo is Script {
         tradeClaims.createSellOffer(1, 1e18, 1e18);
         tradeClaims.createSellOffer(2, 1e18, 2e18);
         vm.stopBroadcast();
+
+
+
+        vm.startBroadcast(sellerPrivateKey);
+        tokenIssuer.issueToken("Troy NY, 2023-11-05", 1000e18, "Wind", 1);
+        vm.stopBroadcast();
+
+        Auction auction2 = Auction(tokenIssuer.getAuction(1));
+        ClaimToken token2 = ClaimToken(tokenIssuer.getToken(1));
+        TradeClaims tradeClaims2 = TradeClaims(tokenIssuer.getTradeClaims(1));
+
+        vm.startBroadcast(traderPrivateKey);
+        auction2.bid{value: 2000e18}();
+        vm.stopBroadcast();
+
+        vm.startBroadcast(sellerPrivateKey);
+        tokenIssuer.endRound(1);
+        vm.stopBroadcast();
+
+        vm.startBroadcast(traderPrivateKey);
+        token2.approve(address(tradeClaims2), 1000e18);
+        tradeClaims2.createSellOffer(1, 1e18, 2e18);
+        tradeClaims2.createSellOffer(2, 1e18, 3e18);
+        vm.stopBroadcast();
     }
 }

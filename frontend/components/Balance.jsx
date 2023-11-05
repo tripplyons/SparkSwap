@@ -7,7 +7,7 @@ import { useContractRead, useAccount } from 'wagmi'
 import ClaimToken from '../src/contracts/ClaimToken.json'
 import Card from './Card';
 
-export default function Balance({ tokenAddress }) {
+export default function Balance({ energyType, tokenAddress }) {
   const { address, isConnecting, isDisconnected } = useAccount()
 
   const balance = useContractRead({
@@ -32,6 +32,9 @@ export default function Balance({ tokenAddress }) {
       )}
       {" "}
       {name.data && name.data}
+      <div>
+        <b className="text-bold">Energy Type:</b> {energyType}
+      </div>
     </Card>
   )
 }
