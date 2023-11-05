@@ -13,12 +13,12 @@ export default function Order({buy, tokenAddress, exchangeAddress, orderId, user
     args: [user, orderId]
   })
   return (
-    <tr className="border border-black">
-      <td>{user}</td>
-      <td>{orderId}</td>
-      <td>{data && (data[1] !== null ? formatUnits(data[1], 18) : null)}</td>
-      <td>{data && (data[0] !== null ? formatUnits(data[0], 18) : null)}</td>
-      <td>
+    <tr className="border border-gray-400">
+      <td className="p-2">{user}</td>
+      <td className="p-2">{orderId}</td>
+      <td className="p-2">{data && (data[1] !== null ? formatUnits(data[1], 18) : null)}</td>
+      <td className="p-2">{data && (data[0] !== null ? formatUnits(data[0], 18) : null)}</td>
+      <td className="p-2">
         <AcceptRequest
           buy={buy}
           exchangeAddress={exchangeAddress}

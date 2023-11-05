@@ -50,11 +50,11 @@ export default function Orders({ tokenAddress, exchangeAddress, buy }) {
         data?.pages ? (
           <table className="table w-full border">
             <thead>
-              <tr className="border border-black">
-                <th>{buy ? "Buyer" : "Seller"}</th>
-                <th>ID</th>
-                <th>Ether</th>
-                <th>kWh</th>
+              <tr className="border border-gray-400">
+                <th className="p-2">{buy ? "Buyer" : "Seller"}</th>
+                <th className="p-2">ID</th>
+                <th className="p-2">Ether</th>
+                <th className="p-2">kWh</th>
               </tr>
             </thead>
             <tbody>
