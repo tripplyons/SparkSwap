@@ -1,7 +1,11 @@
 function LogoDisplayer() {
     return (
         <div class="align-middle">
-            SparkSwap
+          <img
+            src="/logo.png"
+            alt="SparkSwap"
+            width={200}
+          />
         </div>
     )
 }

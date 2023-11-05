@@ -51,10 +51,6 @@ export default function TraderInterface({index}) {
     ],
   })
 
-  console.log("DATA", data)
-  console.log("ISERROR", isError)
-  console.log("ISLOADING", isLoading)
-
   if (!loaded) {
     return null
   }
