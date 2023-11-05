@@ -67,22 +67,21 @@ export default function TraderInterface({index}) {
       </Head>
       {
         data ? (
-          <>
-            <div className="grid grid-cols-3 gap-4">
-              <Balance energyType={data[3].result} tokenAddress={data[0].result} />
+          <div className="px-8">
+            <Balance energyType={data[3].result} tokenAddress={data[0].result} />
+            <div className="grid grid-cols-2 gap-4 mt-4">
               <CancelRequest exchangeAddress={data[2].result} buy={false} />
               <CreateRequest tokenAddress={data[0].result} buy={false} exchangeAddress={data[2].result} />
-              <div />
-              <AcceptRequest tokenAddress={data[0].result} buy={false} exchangeAddress={data[2].result} />
-              <OrdersTable exchangeAddress={data[2].result} buy={false} />
-              <div />
+              <div className="col-span-2">
+                <OrdersTable tokenAddress={data[0].result} exchangeAddress={data[2].result} buy={false} />
+              </div>
               <CancelRequest exchangeAddress={data[2].result} buy={true} />
               <CreateRequest tokenAddress={data[0].result} exchangeAddress={data[2].result} buy={true} />
-              <div />
-              <AcceptRequest tokenAddress={data[0].result} exchangeAddress={data[2].result} buy={true} />
-              <OrdersTable exchangeAddress={data[2].result} buy={true} />
+              <div className="col-span-2">
+                <OrdersTable tokenAddress={data[0].result} exchangeAddress={data[2].result} buy={true} />
+              </div>
             </div>
-          </>
+          </div>
         ) : null
       }
     </div>

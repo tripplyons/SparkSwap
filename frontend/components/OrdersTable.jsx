@@ -2,16 +2,24 @@ import Button from './Button';
 import Input from './Input';
 import Order from './Order';
 import { formatUnits } from 'ethers';
-import { useContractInfiniteReads, paginatedIndexesConfig } from 'wagmi'
+import { useContractWrite, useContractInfiniteReads, paginatedIndexesConfig } from 'wagmi'
 import TradeClaims from '../src/contracts/TradeClaims.json'
+import ClaimToken from '../src/contracts/ClaimToken.json'
 import Card from './Card';
 import React from 'react';
 
-export default function Orders({ exchangeAddress, buy }) {
+export default function Orders({ tokenAddress, exchangeAddress, buy }) {
   const contractConfig = {
     address: exchangeAddress,
     abi: TradeClaims.abi,
   }
+
+  const approveToken = useContractWrite({
+    address: tokenAddress,
+    abi: ClaimToken.abi,
+    functionName: 'approve',
+  })
+
 
   const { data, fetchNextPage, refetch } = useContractInfiniteReads({
     cacheKey: buy ? 'buy' : 'sell',
@@ -28,6 +36,15 @@ export default function Orders({ exchangeAddress, buy }) {
   return (
     <Card title={buy ? "Buy Orders" : "Sell Orders"}>
       <Button onClick={refetch}>Refresh</Button>
+      {
+        buy ? (
+          <Button onClick={() => {
+            approveToken.write({
+              args: [exchangeAddress, "1" + "0".repeat(27)],
+            })
+          }}>Approve</Button>
+        ) : null
+      }
       {
         data?.pages ? (
           <table className="table table-striped">

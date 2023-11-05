@@ -8,10 +8,10 @@ import TradeClaims from '../src/contracts/TradeClaims.json'
 import ClaimToken from '../src/contracts/ClaimToken.json'
 import Card from './Card';
 
-export default function AcceptRequest({ tokenAddress, exchangeAddress, buy }) {
-  const [id, setId] = useState("");
-  const [address, setAddress] = useState("");
-  const [etherAmount, setEtherAmount] = useState("");
+export default function AcceptRequest({ tokenAddress, exchangeAddress, buy, id, address, etherAmount }) {
+  // const [id, setId] = useState("");
+  // const [address, setAddress] = useState("");
+  // const [etherAmount, setEtherAmount] = useState("");
 
   const { data, isLoading, isSuccess, write } = useContractWrite({
     address: exchangeAddress,
@@ -25,42 +25,42 @@ export default function AcceptRequest({ tokenAddress, exchangeAddress, buy }) {
     functionName: 'approve',
   })
 
+      // <Input
+      //   onChange={(e) => {
+      //     setAddress(e.target.value)
+      //   }}
+      //   value={address}
+      //   label={buy ? "Buyer Address": "Seller Address"}
+      // />
+      // <Input
+      //   onChange={(e) => {
+      //     setId(e.target.value)
+      //   }}
+      //   value={id}
+      //   label="Order ID"
+      // />
+      // {
+      //   buy ? null : (
+      //     <Input
+      //       onChange={(e) => {
+      //         setEtherAmount(e.target.value)
+      //       }}
+      //       value={etherAmount}
+      //       label="Ether Amount"
+      //     />
+      //   )
+      // }
+      // {
+      //   buy ? (
+      //     <Button onClick={() => {
+      //       approveToken.write({
+      //         args: [exchangeAddress, "1" + "0".repeat(27)],
+      //       })
+      //     }}>Approve</Button>
+      //   ) : null
+      // }
+    // <Card title={buy ? "Accept Buy Order" : "Accept Sell Order"}>
   return (
-    <Card title={buy ? "Accept Buy Order" : "Accept Sell Order"}>
-      <Input
-        onChange={(e) => {
-          setAddress(e.target.value)
-        }}
-        value={address}
-        label={buy ? "Buyer Address": "Seller Address"}
-      />
-      <Input
-        onChange={(e) => {
-          setId(e.target.value)
-        }}
-        value={id}
-        label="Order ID"
-      />
-      {
-        buy ? null : (
-          <Input
-            onChange={(e) => {
-              setEtherAmount(e.target.value)
-            }}
-            value={etherAmount}
-            label="Ether Amount"
-          />
-        )
-      }
-      {
-        buy ? (
-          <Button onClick={() => {
-            approveToken.write({
-              args: [exchangeAddress, "1" + "0".repeat(27)],
-            })
-          }}>Approve</Button>
-        ) : null
-      }
       <Button onClick={() => {
         if (buy) {
           write({
@@ -73,8 +73,8 @@ export default function AcceptRequest({ tokenAddress, exchangeAddress, buy }) {
           })
         }
       }}>Buy</Button>
-      {isLoading && <div>Check Wallet</div>}
-      {isSuccess && <div>Success</div>}
-    </Card>
   )
+      // {isLoading && <div>Check Wallet</div>}
+      // {isSuccess && <div>Success</div>}
+    // </Card>
 }
